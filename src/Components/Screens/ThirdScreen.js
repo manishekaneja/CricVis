@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Paper, withStyles, Typography, Grid, TableRow, TableBody, TableHead, Table, withWidth, Button } from '@material-ui/core';
-import { purple } from '@material-ui/core/colors'
-import CustomTableCell from '../DialogScreen/TableComponents/CustomTableCell';
+import { purple } from '@material-ui/core/colors';
 import { isWidthUp } from '@material-ui/core/withWidth';
+
+import CustomTableCell from '../DialogScreen/TableComponents/CustomTableCell';
 const style = theme => ({
     root: {
         backgroundColor: purple[100],
@@ -20,9 +22,9 @@ const style = theme => ({
     inherit: {
         fontFamily: "inherit"
     }
-
 })
 
+//This component represent the Third Screen of the Appliction  
 const ThirdScreen = ({ favor, next, classes, width }) => <Paper className={classes.root} elevation={0}>
     <Typography className={classes.inherit} align="center" variant={isWidthUp('sm', width) ? "display2" : "title"} color="inherit">
         {favor ? "Then You will Love this Tour" : "Then you must take a glance at his Cricket Carrer"}
@@ -44,7 +46,6 @@ const ThirdScreen = ({ favor, next, classes, width }) => <Paper className={class
                         </TableRow>
                     </TableHead>
                     <TableBody>
-
                         <TableRow className={classes.row}>
                             <CustomTableCell> Runs scored</CustomTableCell>
                             <CustomTableCell>15,921</CustomTableCell>
@@ -70,7 +71,12 @@ const ThirdScreen = ({ favor, next, classes, width }) => <Paper className={class
         </Button>
         </Grid>
     </Grid>
-
 </Paper >
+
+ThirdScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    favor: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired
+}
 
 export default withWidth()(withStyles(style)(ThirdScreen));

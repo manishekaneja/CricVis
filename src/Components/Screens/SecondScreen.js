@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Paper, withStyles, Typography, Grid, Button, withWidth, } from '@material-ui/core';
 import { isWidthUp } from '@material-ui/core/withWidth'
-import photo from '../../assets/sachin_photo.jpg';
 import { purple } from '@material-ui/core/colors'
+
+import photo from '../../assets/sachin_photo.jpg';
 
 const style = theme => ({
     root: {
@@ -16,8 +18,9 @@ const style = theme => ({
     inherit: {
         fontFamily: "inherit"
     }
-
 })
+
+//This component represent the Second Screen of the Appliction  
 const SecondScreen = ({ classes, width, next }) => <Paper className={classes.root} elevation={0}>
     <Grid container justify="center" >
         <Grid item xl={2} lg={3} md={4} sm={5} xs={10}>
@@ -46,5 +49,10 @@ const SecondScreen = ({ classes, width, next }) => <Paper className={classes.roo
         </Grid>
     </Grid>
 </Paper>
+
+SecondScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired
+}
 
 export default withWidth()(withStyles(style)(SecondScreen));

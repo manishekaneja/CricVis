@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import { AppBar, Toolbar, Typography,  withWidth, Icon, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, withWidth, Icon, IconButton } from '@material-ui/core';
+
 import MyDialog from '../DialogScreen/MyDialog';
 
+//This componet is the main Header 
 class MyHeader extends React.Component {
     constructor() {
         super();
@@ -17,7 +19,7 @@ class MyHeader extends React.Component {
                     </Typography>
                 <IconButton color="secondary" variant="contained" onClick={() => this.setState({ open: true })}>
                     <Icon>
-                        data_usage
+                    assessment
                    </Icon>
                 </IconButton>
             </Toolbar>

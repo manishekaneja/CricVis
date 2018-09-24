@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Grid, withStyles, Toolbar, Typography, TextField } from '@material-ui/core';
-import FullTable from './FullTable';
-import PaginationTable from './PaginationTable';
 import { isWidthUp } from '@material-ui/core/withWidth';
+
+import PaginationTable from './PaginationTable';
 
 const styles = theme => ({
   root: {
@@ -23,6 +24,7 @@ const styles = theme => ({
   },
 });
 
+//
 class MyCustomTable extends React.Component {
   constructor(props) {
     super(props)
@@ -33,7 +35,6 @@ class MyCustomTable extends React.Component {
       query: ''
     }
   }
-
   listValueFilter = list => list.filter(ele => {
     if (this.state.query) {
       for (let key in ele) {
@@ -47,8 +48,6 @@ class MyCustomTable extends React.Component {
       return true;
     }
   })
-
-
   listDateFilter = list => {
     let fromDate = (+new Date(this.state.from));
     let toDate = (+new Date(this.state.to));
@@ -71,11 +70,7 @@ class MyCustomTable extends React.Component {
     </Grid>
     <Grid md={4} xs={11} item >
       <Toolbar>
-        <TextField
-          label="From"
-          fullWidth
-          type="date"
-          defaultValue={this.state.from}
+        <TextField label="From" fullWidth type="date" defaultValue={this.state.from}
           onChange={event => {
             if (event.target.value) {
               let date = new Date(event.target.value).toISOString().split('T')[0]
@@ -84,17 +79,12 @@ class MyCustomTable extends React.Component {
           }}
           InputLabelProps={{
             shrink: true,
-          }}
-        />
+          }} />
       </Toolbar>
     </Grid>
     <Grid md={4} xs={11} item >
       <Toolbar>
-        <TextField
-          label="To"
-          fullWidth
-          type="date"
-          defaultValue={this.state.to}
+        <TextField label="To" fullWidth type="date" defaultValue={this.state.to}
           onChange={event => {
             if (event.target.value) {
               let date = new Date(event.target.value).toISOString().split('T')[0]
@@ -103,36 +93,35 @@ class MyCustomTable extends React.Component {
           }}
           InputLabelProps={{
             shrink: true,
-          }}
-        />
+          }} />
       </Toolbar>
     </Grid>
     <Grid item xs={11}>
-      {this.props.status.full ?
-        <FullTable list={this.listValueFilter(this.listDateFilter(this.props.list))} classes={this.props.classes} status={this.props.status} />
-        :
-        <PaginationTable index={this.state.index} next={() => this.setState(state => {
-          if (state.index < (Math.floor(this.props.list.length / 10))) {
-            return {
-              index: state.index + 1
-            }
+      <PaginationTable index={this.state.index} next={() => this.setState(state => {
+        if (state.index < (Math.floor(this.props.list.length / 10))) {
+          return {
+            index: state.index + 1
           }
-          else {
-            return { index: state.index }
+        }
+        else {
+          return { index: state.index }
+        }
+      })} previous={() => this.setState(state => {
+        if (state.index > 0) {
+          return {
+            index: state.index - 1
           }
-        })} previous={() => this.setState(state => {
-          if (state.index > 0) {
-            return {
-              index: state.index - 1
-            }
-          }
-          else {
-            return { index: state.index }
-          }
-        })} list={this.listValueFilter(this.listDateFilter(this.props.list))} classes={this.props.classes} status={this.props.status} />
-      }
+        }
+        else {
+          return { index: state.index }
+        }
+      })} list={this.listValueFilter(this.listDateFilter(this.props.list))} classes={this.props.classes} status={this.props.status} />
     </Grid>
   </Grid>
 }
-
+MyCustomTable.propTypes = {
+  width: PropTypes.string.isRequired,
+  list: PropTypes.array.isRequired,
+  status: PropTypes.object.isRequired
+}
 export default withStyles(styles)(MyCustomTable);

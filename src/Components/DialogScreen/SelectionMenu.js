@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { IconButton, MenuItem, Menu, Checkbox } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-
+//Having a functionality for selecting the Columns in the Display Table
 class SelectionMenu extends React.Component {
   constructor() {
     super();
@@ -10,9 +11,8 @@ class SelectionMenu extends React.Component {
       element: null
     }
   }
-
+  componentDidMount = () => this.setState({ someKey: 'otherValue' });
   onClose = () => this.setState({ element: null })
-
   render = () => <div>
     <IconButton onClick={event => this.setState({ element: event.currentTarget })} color="inherit" ><MoreVertIcon color="inherit" /></IconButton>
     <Menu
@@ -31,9 +31,12 @@ class SelectionMenu extends React.Component {
       <MenuItem onClick={this.props.handleClick('match_result')}> <Checkbox checked={this.props.status.match_result} /> Match Results</MenuItem>
     </Menu>
   </div>
-  componentDidMount() {
-    this.setState({ someKey: 'otherValue' });
-  }
 }
-
+SelectionMenu.propTypes = {
+  state: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired
+}
+SelectionMenu.defaultProps = {
+  state: false
+}
 export default SelectionMenu;

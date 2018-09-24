@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Paper, withStyles, Typography, Grid, Button, withWidth } from '@material-ui/core';
-import PieChart from '../Charts/PieChart';
 import { purple } from '@material-ui/core/colors'
-
 import { isWidthUp } from '@material-ui/core/withWidth';
+
+import PieChart from '../Charts/PieChart';
+
 const style = theme => ({
     root: {
         backgroundColor: purple[100],
@@ -24,9 +26,9 @@ const style = theme => ({
     inherit: {
         fontFamily: "inherit"
     }
-
 })
 
+//This component represent the Fourth Screen of the Appliction  
 const FourthScreen = ({ favor, next, classes, width }) => <Paper className={classes.root} elevation={0}>
     <Typography className={classes.inherit} align="center" variant={isWidthUp('sm', width) ? "display2" : "title"} color="inherit">
         {favor ? "You Might Find It Intresting." : "Let's see the wall of Truth."}
@@ -48,7 +50,12 @@ const FourthScreen = ({ favor, next, classes, width }) => <Paper className={clas
             </Button>
         </Grid>
     </Grid>
-
 </Paper >
+
+FourthScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    favor: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired
+}
 
 export default withWidth()(withStyles(style)(FourthScreen));

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Slide } from '@material-ui/core'
+
 import EntryScreen from './EntryScreen';
 import SecondScreen from './SecondScreen';
 import ThirdScreen from './ThirdScreen';
@@ -9,12 +11,22 @@ import LastScreen from './LastScreen';
 import SixthScreen from './SixthScreen';
 import SevenScreen from './SevenScreen';
 
+//Component for setting a basic Animation template for all Components
 const AnimateSetup = ({ condition, children }) => <Slide in={condition} direction={"left"} timeout={{ entry: 500, exit: 0 }} mountOnEnter unmountOnExit>
     <div>
         {children}
     </div>
 </Slide>
 
+AnimateSetup.propTypes = {
+    condition: PropTypes.bool.isRequired,
+    children: PropTypes.element
+}
+AnimateSetup.defaultProps = {
+    children: null
+}
+
+//Component Responsible for managing the animations of Components entry and exit
 class AnimateScreens extends React.Component {
     constructor(props) {
         super(props)
@@ -51,7 +63,15 @@ class AnimateScreens extends React.Component {
             </AnimateSetup>
         </React.Fragment>
     }
+}
 
+AnimateScreens.propTypes = {
+    next: PropTypes.func.isRequired,
+    checked: PropTypes.number
+}
+
+AnimateScreens.defaultProps = {
+    checked: 0
 }
 
 

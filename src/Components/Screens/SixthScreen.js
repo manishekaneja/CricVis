@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Paper, withStyles, Typography, Grid, Button } from '@material-ui/core';
 import { purple } from '@material-ui/core/colors'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import PieChart2 from '../Charts/PieChart2';
 import BarGraph from '../Charts/BarGraph';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 const style = theme => ({
     root: {
@@ -29,6 +30,7 @@ const style = theme => ({
 
 })
 
+//This component represent the Sixth Screen of the Appliction  
 const SixthScreen = ({ favor, next, classes, width }) => <Paper className={classes.root} elevation={0}>
     <Typography className={classes.inherit} align="center" variant="headline" color="inherit">
         Here are the Some othee Visualization of Sachin's Carrer
@@ -59,7 +61,12 @@ const SixthScreen = ({ favor, next, classes, width }) => <Paper className={class
                 What's next now??     </Button>
         </Grid>
     </Grid>
-
 </Paper >
+
+SixthScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    favor: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired
+}
 
 export default withWidth()(withStyles(style)(SixthScreen));

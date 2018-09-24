@@ -1,9 +1,11 @@
 import React from 'react';
-import { Paper, withStyles, Typography, Grid, withWidth, Button } from '@material-ui/core';
-import LineDotGraph from '../Charts/LineDotGraph';
+import PropTypes from 'prop-types'
 import { purple } from '@material-ui/core/colors'
-
+import { Paper, withStyles, Typography, Grid, withWidth, Button } from '@material-ui/core';
 import { isWidthUp } from '@material-ui/core/withWidth';
+
+
+import LineDotGraph from '../Charts/LineDotGraph';
 const style = theme => ({
     root: {
         backgroundColor: purple[100],
@@ -24,10 +26,10 @@ const style = theme => ({
     inherit: {
         fontFamily: "inherit"
     }
-
 })
 
-const FourthScreen = ({ favor, next, classes, width }) => <Paper className={classes.root} elevation={0}>
+//This component represent the Fifth Screen of the Appliction  
+const FifthScreen = ({ favor, next, classes, width }) => <Paper className={classes.root} elevation={0}>
     <Typography className={classes.inherit} align="center" variant={isWidthUp('md', width) ? "display2" : 'title'} color="inherit">
         {favor ? "Here it is... " : "TRUE... But May be he is a good Team Player.Now look Bellow."}
         <br />
@@ -45,7 +47,12 @@ const FourthScreen = ({ favor, next, classes, width }) => <Paper className={clas
             </Button>
         </Grid>
     </Grid>
-
 </Paper >
 
-export default withWidth()(withStyles(style)(FourthScreen));
+FifthScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    favor: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired
+}
+
+export default withWidth()(withStyles(style)(FifthScreen));

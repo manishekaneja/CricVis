@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+
 import { RadialChart, DiscreteColorLegend } from 'react-vis';
+
 import json from '../../data.json';
 const calc = (() => {
     let data = {
@@ -30,39 +33,48 @@ const calc = (() => {
     return data;
 })()
 
-class PieChart2 extends React.Component {
-    render = () => <React.Fragment>
-        <RadialChart
-            data={[
-                { angle: calc.hundred, color: '#f00' },
-                { angle: calc.fifty, color: 'blue' },
-                { angle: calc.score, color: 'green' },
-                { angle: calc.zero, color: 'orange' },
-                { angle: calc.notPlayed, color: 'yellow' },
-            ]}
-            colorType='literal'
-            width={this.props.width} height={this.props.height}
-            radius={this.props.width < 600 ? this.props.width / 2 : 200}
-        />
-        <DiscreteColorLegend
-            colors={[
-                'red',
-                'blue',
-                'green',
-                'orange',
-                'yellow'
-            ]}
-            items={[
-                `HUNDRED (${calc.hundred})`,
-                `FIFTY (${calc.fifty})`,
-                `BELOW FIFTY (${calc.score})`,
-                `DUCK ${calc.zero}`,
-                `NOT PLAYED ${calc.zero}`
-            ]}
-            orientation="vertical"
-        />
-    </React.Fragment>
+//Componet to Display Second PieChart
+const PieChart2 = ({ width, height }) => <React.Fragment>
+    <RadialChart
+        data={[
+            { angle: calc.hundred, color: '#f00' },
+            { angle: calc.fifty, color: 'blue' },
+            { angle: calc.score, color: 'green' },
+            { angle: calc.zero, color: 'orange' },
+            { angle: calc.notPlayed, color: 'yellow' },
+        ]}
+        colorType='literal'
+        width={width} height={height}
+        padAngle={0.05}
+        innerRadius={width < 300 ? 50 : 80}
+        radius={width < 600 ? width / 2 : 200}
+        style={{
+            strokeWidth: "1px",
+            stroke: "black"
+        }}
+    />
+    <DiscreteColorLegend
+        colors={[
+            'red',
+            'blue',
+            'green',
+            'orange',
+            'yellow'
+        ]}
+        items={[
+            `HUNDRED (${calc.hundred})`,
+            `FIFTY (${calc.fifty})`,
+            `BELOW FIFTY (${calc.score})`,
+            `DUCK ${calc.zero}`,
+            `NOT PLAYED ${calc.zero}`
+        ]}
+        orientation="vertical"
+    />
+</React.Fragment>
 
+PieChart2.propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired
 }
 
 export default PieChart2;

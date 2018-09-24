@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+
 import { Paper, withStyles, Typography, Grid, Button } from '@material-ui/core';
 import { purple } from '@material-ui/core/colors'
 
-import f from './../../assets/f.png'
-import s from './../../assets/s.png'
+import firstPic from './../../assets/f.png'
+import secondPic from './../../assets/s.png'
 
 const style = theme => ({
     root: {
@@ -25,6 +27,7 @@ const style = theme => ({
 
 })
 
+//This component represent the Seven Screen of the Appliction  
 const SevenScreen = ({ favor, next, classes }) => <Paper className={classes.root} elevation={0}>
     <Typography align="center" variant="headline" style={{ fontFamily: "inherit" }} color="inherit">
         Well, all of this was statical data. It doesn't tell us about how he behave with other players or his nature.
@@ -35,20 +38,27 @@ const SevenScreen = ({ favor, next, classes }) => <Paper className={classes.root
     <Typography align="center" color="inherit" variant="display2" style={{ marginTop: 10 }}>Facts Time</Typography>
     <Grid container justify="center" spacing={24}>
         <Grid item md={6} xs={12} >
-            <img src={f} style={{ width: '100%', height: '100%' }} alt="first_img" />
+            <img src={firstPic} style={{ width: '100%', height: '100%' }} alt="first_img" />
         </Grid>
         <Grid item md={6} xs={12} >
-            <img src={s} style={{ width: '100%', height: '100%' }} alt="second_img" />
+            <img src={secondPic} style={{ width: '100%', height: '100%' }} alt="second_img" />
         </Grid>
         <Grid item xs={12}>
             Above two images make it totally clear that Wikipedia didn't say but it's own. Almost all the Crickets belive it.
         </Grid>
         <Grid item >
             <Button variant="contained" color="primary" onClick={() => next(true)}>
-                Let's End the Tour now        </Button>
+                Let's End the Tour now
+           </Button>
         </Grid>
     </Grid>
-
 </Paper >
+
+SevenScreen.propTypes = {
+    next: PropTypes.func.isRequired,
+    favor: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired
+}
+
 
 export default withStyles(style)(SevenScreen);
